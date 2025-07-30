@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import { useEffect, useState } from "react";
 
 // export default function SearchPage() {
@@ -222,7 +223,7 @@
 // }
 
 import { useEffect, useState } from "react";
-import { useWatchlist } from "../context/WatchlistContext";
+import MovieCard from "../components/MovieCard";
 
 export default function SearchPage() {
   const [input, setInput] = useState("");
@@ -230,7 +231,6 @@ export default function SearchPage() {
   const [defaultMovies, setDefaultMovies] = useState([]);
   const [selectedMovieResult, setSelectedMovieResult] = useState(null);
   const [show, setShow] = useState(false);
-  const { addToWatchlist, watchlist, removeFromWatchlist } = useWatchlist();
 
   // Fetch random/default movies suggestions
   const fetchDefaultMovies = async () => {
@@ -238,7 +238,7 @@ export default function SearchPage() {
       const res = await fetch(
         `https://www.omdbapi.com/?apikey=${
           import.meta.env.VITE_SOME_KEY
-        }&s=lucy`
+        }&s=marvel`
       );
       const data = await res.json();
       if (data.Response === "True") {
@@ -334,7 +334,7 @@ export default function SearchPage() {
       </div>
 
       {/* Movie Cards */}
-      <div className="w-full max-w-6xl mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {/* <div className="w-full max-w-6xl mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {displayedMovies.map((movie) => (
           <div
             key={movie.imdbID}
@@ -346,7 +346,7 @@ export default function SearchPage() {
               className="w-full h-80 object-cover"
             />
 
-            {/* default movie show for good experiance*/}
+            {/* default movie show for good experiance
             <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/70 to-transparent p-4 text-white flex flex-col justify-end min-h-24">
               <h2 className="text-lg font-semibold truncate">{movie.Title}</h2>
               <p className="text-sm mb-2">{movie.Year}</p>
@@ -369,7 +369,9 @@ export default function SearchPage() {
             </div>
           </div>
         ))}
-      </div>
+      </div> 
+    */}
+      <MovieCard displayedMovies={displayedMovies} />
     </div>
   );
 }

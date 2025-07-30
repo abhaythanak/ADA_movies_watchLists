@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createContext, useContext, useEffect, useState } from "react";
 
 // 1. Create context
@@ -5,10 +6,29 @@ const WatchlistContext = createContext();
 
 // 2. Create provider
 export function WatchlistProvider({ children }) {
-  const [watchlist, setWatchlist] = useState([]);
+  const [watchlist, setWatchlist] = useState(() => {
+    try {
+      const saved = localStorage.getItem("watchlist");
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error("Failed to load watchlist from localStorage:", error);
+      return [];
+    }
+  });
 
-  // 3. Functions to add/remove
+  // Save to localStorage every time watchlist changes
+  useEffect(() => {
+    try {
+      localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    } catch (err) {
+      console.error("Error saving watchlist to localStorage:", err);
+    }
+  }, [watchlist]);
+
+  // Add to watchlist
   const addToWatchlist = (movie) => {
+    if (!movie?.imdbID) return;
+
     setWatchlist((prev) => {
       if (!prev.find((m) => m.imdbID === movie.imdbID)) {
         return [...prev, movie];
@@ -17,6 +37,7 @@ export function WatchlistProvider({ children }) {
     });
   };
 
+  // Remove from watchlist
   const removeFromWatchlist = (id) => {
     setWatchlist((prev) => prev.filter((movie) => movie.imdbID !== id));
   };
