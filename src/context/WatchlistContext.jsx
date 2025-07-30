@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { createContext, useContext, useEffect, useState } from "react";
 
-// 1. Create context
+//  Create context
 const WatchlistContext = createContext();
 
-// 2. Create provider
+//  Create provider
 export function WatchlistProvider({ children }) {
   const [watchlist, setWatchlist] = useState(() => {
     try {
@@ -51,7 +51,7 @@ export function WatchlistProvider({ children }) {
   );
 }
 
-// 4. Hook for easy usage
+//  Hook for easy usage
 export function useWatchlist() {
   return useContext(WatchlistContext);
 }
