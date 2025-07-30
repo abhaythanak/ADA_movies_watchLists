@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useWatchlist } from "../context/WatchlistContext";
 
 export default function Navbar() {
+  const { watchlist } = useWatchlist();
   return (
     <header className="mx-auto mt-5 rounded-2xl w-full max-w-[600px] border border-gray-100 bg-white/80 py-3 shadow backdrop-blur-lg">
       <div className="px-4">
@@ -8,14 +10,11 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link to="/">
               <img
-                className="h-7 w-auto"
-                src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                className="h-10 w-auto"
+                src="https://imgs.search.brave.com/l7USP3DSxA24RnUezB8n_HBFS9s76evqqWUrGYJX2T0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cy4x/MjNyZi5jb20vNDUw/d20va2FlcjEyMy9r/YWVyMTIzMjEwMy9r/YWVyMTIzMjEwMzAw/MDM4LzE2NjU1MDM3/OC1tLWxldHRlci1j/b2xvcmZ1bC1saW5l/LWxvZ28tZm9udC1z/dHlsZS12ZWN0b3It/ZGVzaWduLXRlbXBs/YXRlLWVsZW1lbnRz/LWZvci15b3VyLXN1/Y2Nlc3MuanBnP3Zl/cj02"
                 alt="Logo"
               />
             </Link>
-            <span className="text-base font-semibold text-gray-800">
-              MovieApp
-            </span>
           </div>
 
           <nav className="flex gap-10">
@@ -27,9 +26,12 @@ export default function Navbar() {
             </Link>
             <Link
               to="/watchlist"
-              className="text-sm font-bold text-gray-800 hover:text-gray-900"
+              className="relative text-sm font-bold text-gray-800 hover:text-gray-900"
             >
-              Watchlist
+              Watchlist{" "}
+              <span className="absolute -top-3 left-12 text-gray-100 rounded-full bg-amber-500 w-5 h-5 text-center">
+                {watchlist.length}
+              </span>
             </Link>
           </nav>
         </div>
