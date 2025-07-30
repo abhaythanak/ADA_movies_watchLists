@@ -12,7 +12,7 @@ export default function MovieCard({ displayedMovies }) {
           <img
             src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.jpg"}
             alt={movie.Title}
-            className="w-full h-80 object-cover"
+            className="w-full h-80 "
           />
 
           {/* default movie show for good experiance*/}
