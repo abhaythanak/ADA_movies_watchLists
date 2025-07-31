@@ -3,6 +3,19 @@ Deploy Link :  https://ada-assignment-moviewatchlist.netlify.app/
 A responsive and user-friendly React application that allows users to search for movies using the OMDb API and maintain a personal watchlist with persistent local storage.
 
 ---
+## 🔧 Setup Instructions
+
+### 1. Clone the Repository
+
+git clone https://github.com/your-username/movie-watchlist-app.git
+cd movie-watchlist-app
+
+npm install
+# or
+yarn install
+
+Create a .env file in the root and add your OMDb API key:  VITE_OMDB_API_KEY=your_api_key_here
+
 
 ## 🚀 Features
 
